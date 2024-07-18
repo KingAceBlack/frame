@@ -12,18 +12,18 @@ const myCache = new NodeCache();
 
 
 // Example of setting data in cache
-const key = 'myDataKey';
-const initialData = { count: 0 };
-myCache.set(key, initialData);
-let cachedData = myCache.get(key);
+
 
 // Uncomment to use Edge Runtime.
 // export const config = {
 //   runtime: 'edge',
 // }
+const key = 'myDataKey';
+const initialData = { count: 0 };
+const ttl = 600; // TTL in seconds
 
-
-
+myCache.set(key, initialData, ttl);
+let cachedData = myCache.get(key);
 
 
 
@@ -61,7 +61,10 @@ export const app = new Frog({
 function incrementCounter() {
     
     counter += 1;
+
 }
+
+
 
 
 app.frame('/', (c) => {
